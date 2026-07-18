@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>🦕 Baby Shower · Aldric Khael</title>
+<meta property="og:title" content="¡Un pequeño dino está en camino! 🦖">
+<meta property="og:description" content="Adaliz & Henry te invitan al baby shower de Aldric Khael · Sábado 8 de agosto">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FBF7EE;
+  --paper:#FFFDF8;
+  --sage:#8FAE8B;
+  --sage-deep:#4E6B52;
+  --sage-dark:#37503C;
+  --sky:#AFCBDC;
+  --sky-deep:#7FA5BD;
+  --egg:#EAD9B8;
+  --spot:#B8D4C2;
+  --ink:#3A4A3D;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:'Nunito',sans-serif;
+  background:linear-gradient(180deg,#D6E7F0 0%, var(--cream) 45%, #E4EDD6 100%);
+  color:var(--ink);
+  overflow-x:hidden;
+  min-height:100vh;min-height:100dvh;
+}
+
+/* ── botón de sonido ── */
+#mute-btn{
+  position:fixed;top:14px;right:14px;z-index:100;
+  width:46px;height:46px;border-radius:50%;
+  border:2px solid var(--sage);
+  background:rgba(255,253,248,.9);
+  font-size:1.25rem;cursor:pointer;
+  box-shadow:0 3px 10px rgba(63,84,66,.15);
+  transition:transform .15s;
+  display:flex;align-items:center;justify-content:center;
+}
+#mute-btn:active{transform:scale(.9)}
+
+/* ═══════════ ESCENA 1: HUEVO ═══════════ */
+#scene-egg{
+  position:fixed;inset:0;z-index:10;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .9s ease, visibility .9s;
+  overflow:hidden;
+}
+#scene-egg.done{opacity:0;visibility:hidden;pointer-events:none}
+
+/* manchas acuarela de fondo */
+.wash{position:absolute;border-radius:50%;filter:blur(38px);pointer-events:none;opacity:.55}
+.wash-1{width:52vmin;height:52vmin;background:#BCD8C4;top:-12vmin;left:-14vmin}
+.wash-2{width:46vmin;height:46vmin;background:#C9DEEA;top:4vmin;right:-16vmin}
+.wash-3{width:58vmin;height:58vmin;background:#D9E6C4;bottom:-18vmin;left:8vmin}
+.wash-4{width:40vmin;height:40vmin;background:#F4E3C0;bottom:-8vmin;right:-10vmin;opacity:.45}
+
+/* hojas decorativas */
+.foliage{position:absolute;pointer-events:none}
+.foliage svg{display:block;width:100%;height:auto}
+.fol-tl{top:-3vmin;left:-4vmin;width:clamp(150px,36vw,300px);animation:sway 7s ease-in-out infinite}
+.fol-tr{top:-4vmin;right:-5vmin;width:clamp(160px,38vw,320px);transform:scaleX(-1);animation:sway 8s ease-in-out infinite reverse}
+.fol-bl{bottom:-4vmin;left:-4vmin;width:clamp(130px,32vw,260px);transform:rotate(-8deg);animation:sway 9s ease-in-out infinite}
+.fol-br{bottom:-3vmin;right:-4vmin;width:clamp(140px,34vw,280px);transform:scaleX(-1) rotate(-6deg);animation:sway 7.5s ease-in-out infinite reverse}
+@keyframes sway{0%,100%{rotate:0deg}50%{rotate:2.5deg}}
+
+.scene-title{
+  font-family:'Fredoka',sans-serif;font-weight:700;
+  font-size:clamp(1.7rem,6.5vw,2.5rem);
+  color:var(--sage-dark);letter-spacing:.02em;text-align:center;
+  animation:floatIn 1s ease both;position:relative;z-index:2;
+  text-shadow:0 2px 0 rgba(255,255,255,.6);
+}
+.scene-sub{
+  font-size:clamp(.95rem,3.5vw,1.15rem);font-weight:700;color:#63805F;
+  margin-top:.45rem;animation:floatIn 1s .2s ease both;position:relative;z-index:2;
+}
+@keyframes floatIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+#egg-stage{
+  position:relative;z-index:2;
+  width:min(74vw,320px);aspect-ratio:3/3.6;
+  margin-top:1.8rem;cursor:pointer;user-select:none;
+  animation:floatIn 1s .35s ease both;
+}
+#egg-svg{width:100%;height:100%;display:block;overflow:visible}
+
+.egg-idle{animation:wobble 3.4s ease-in-out infinite;transform-origin:50% 92%}
+@keyframes wobble{
+  0%,100%{transform:rotate(0)}
+  10%{transform:rotate(-2.4deg)}
+  20%{transform:rotate(2deg)}
+  30%{transform:rotate(-1deg)}
+  40%{transform:rotate(0)}
+}
+.egg-shake{animation:shake .55s ease both !important;transform-origin:50% 92%}
+@keyframes shake{
+  0%{transform:rotate(0) translateY(0)}
+  15%{transform:rotate(-8deg) translateY(-4px)}
+  30%{transform:rotate(7deg)}
+  45%{transform:rotate(-5deg) translateY(-2px)}
+  60%{transform:rotate(4deg)}
+  80%{transform:rotate(-2deg)}
+  100%{transform:rotate(0)}
+}
+
+.crack{stroke:#7D6743;stroke-width:3.6;fill:none;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:230;stroke-dashoffset:230;opacity:0}
+.crack.show{animation:drawCrack .45s ease forwards}
+@keyframes drawCrack{from{stroke-dashoffset:230;opacity:1}to{stroke-dashoffset:0;opacity:1}}
+
+#egg-top{transform-origin:50% 100%;transition:transform .75s cubic-bezier(.3,1.15,.5,1), opacity .75s}
+#egg-top.pop{transform:translate(-84px,-210px) rotate(-42deg);opacity:0}
+
+#dino{transform:translateY(130px);opacity:0;
+  transition:transform .85s cubic-bezier(.34,1.56,.44,1) .25s, opacity .4s .25s}
+#dino.hatch{transform:translateY(0);opacity:1}
+#dino.hatch #dino-inner{animation:bob 3s ease-in-out .9s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* parpadeo */
+.eyelid{transform-origin:center;transform:scaleY(0);transition:transform .08s}
+.blink .eyelid{transform:scaleY(1)}
+
+#rawr{
+  position:absolute;top:-10%;left:50%;
+  transform:translateX(-50%) scale(0);
+  font-family:'Fredoka',sans-serif;font-weight:700;
+  font-size:clamp(1.9rem,8vw,2.7rem);
+  color:var(--sage-dark);background:var(--paper);
+  border:3px solid var(--sage-deep);border-radius:50px;
+  padding:.35em .85em;
+  box-shadow:0 7px 0 rgba(78,107,82,.28);
+  transition:transform .5s cubic-bezier(.34,1.8,.44,1);
+  pointer-events:none;white-space:nowrap;z-index:3;
+}
+#rawr.show{transform:translateX(-50%) scale(1) rotate(-4deg)}
+
+#tap-hint{margin-top:1.5rem;display:flex;align-items:center;gap:.6rem;
+  animation:floatIn 1s .5s ease both;position:relative;z-index:2}
+.tap-dot{width:13px;height:13px;border-radius:50%;background:#D6E0D0;
+  border:2px solid var(--sage);transition:background .3s,transform .3s}
+.tap-dot.on{background:var(--sage-deep);transform:scale(1.3)}
+#tap-label{font-weight:800;color:#63805F;font-size:.95rem}
+
+.confetti{position:fixed;top:-40px;pointer-events:none;z-index:60;will-change:transform}
+@keyframes fall{to{transform:translateY(112vh) rotate(680deg);opacity:.15}}
+.sparkle{position:fixed;pointer-events:none;z-index:65;font-size:20px;
+  animation:sparklePop .9s ease forwards}
+@keyframes sparklePop{
+  0%{transform:scale(0) rotate(0);opacity:1}
+  60%{transform:scale(1.3) rotate(40deg);opacity:1}
+  100%{transform:scale(.4) rotate(80deg);opacity:0}
+}
+
+/* ═══════════ ESCENA 2: INVITACIÓN ═══════════ */
+#scene-invite{
+  position:relative;z-index:5;
+  min-height:100vh;min-height:100dvh;
+  display:none;
+  padding:clamp(14px,4vw,36px) clamp(12px,4vw,24px) 60px;
+}
+#scene-invite.show{display:flex;justify-content:center;align-items:flex-start}
+
+.card{
+  position:relative;
+  width:min(100%,470px);
+  background:var(--paper);
+  border-radius:28px;
+  box-shadow:0 20px 55px rgba(63,84,66,.20), 0 3px 10px rgba(63,84,66,.08);
+  padding:clamp(1.7rem,6vw,2.7rem) clamp(1.2rem,5vw,2.2rem) 2.4rem;
+  overflow:hidden;
+  opacity:0;transform:translateY(44px) scale(.96);
+  transition:opacity .8s ease, transform .8s cubic-bezier(.22,1,.36,1);
+}
+.card.in{opacity:1;transform:none}
+.card-foliage{position:absolute;pointer-events:none;opacity:.85}
+.cf-tl{top:-14px;left:-18px;width:clamp(110px,30vw,170px)}
+.cf-br{bottom:-16px;right:-18px;width:clamp(120px,32vw,180px);transform:scaleX(-1) rotate(-4deg)}
+.card-foliage svg{display:block;width:100%;height:auto}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.rel{position:relative;z-index:2}
+
+.eyebrow{text-align:center;font-weight:800;letter-spacing:.3em;text-transform:uppercase;
+  font-size:.72rem;color:var(--sky-deep)}
+h1.rawr-title{
+  font-family:'Fredoka',sans-serif;font-weight:700;text-align:center;
+  font-size:clamp(2.7rem,11vw,3.7rem);color:var(--sage-dark);
+  line-height:1;margin-top:.35rem;
+}
+.subtitle{text-align:center;font-family:'Fredoka',sans-serif;font-weight:500;
+  font-size:clamp(1.15rem,4.6vw,1.5rem);color:var(--sage-deep);margin-top:.35rem}
+
+.dino-mini{display:flex;justify-content:center;margin:1.05rem 0 .3rem}
+.dino-mini svg{width:clamp(150px,42vw,200px);height:auto}
+.dino-mini .float{animation:bob 3.4s ease-in-out infinite}
+
+.invite-text{text-align:center;font-size:.98rem;color:#5C6E5F;font-weight:600;
+  margin-top:.85rem;line-height:1.55}
+.parents{font-family:'Caveat',cursive;font-weight:700;
+  font-size:clamp(2.1rem,8.4vw,2.7rem);color:var(--sage-deep);
+  text-align:center;line-height:1.1;margin-top:.15rem}
+
+.baby-name{
+  text-align:center;margin-top:1.25rem;
+  padding:1rem .8rem 1.1rem;
+  background:linear-gradient(180deg,#F1F6EC,#E5EFE1);
+  border:2px dashed var(--sage);border-radius:20px;
+}
+.baby-name .label{font-size:.72rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:#7C9280}
+.baby-name .name{font-family:'Fredoka',sans-serif;font-weight:700;
+  font-size:clamp(2rem,8.4vw,2.6rem);color:var(--sage-dark);margin-top:.15rem}
+.baby-name .paws{font-size:1rem;margin-top:.25rem;letter-spacing:.5em}
+
+/* countdown */
+.countdown{margin-top:1.35rem}
+.countdown .cd-label{text-align:center;font-size:.72rem;font-weight:800;
+  letter-spacing:.24em;text-transform:uppercase;color:#93A08F;margin-bottom:.55rem}
+.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem}
+.cd-box{
+  background:linear-gradient(180deg,#EAF2F6,#DEEAF1);
+  border-radius:16px;padding:.7rem .2rem .6rem;text-align:center;
+  border:1.5px solid #CCDDE8;
+}
+.cd-box b{display:block;font-family:'Fredoka',sans-serif;font-weight:700;
+  font-size:clamp(1.4rem,6vw,1.8rem);color:#4B6B80;line-height:1;
+  font-variant-numeric:tabular-nums}
+.cd-box span{display:block;font-size:.62rem;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:#7FA5BD;margin-top:.3rem}
+.cd-flip{animation:cdPop .4s ease}
+@keyframes cdPop{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+
+/* detalles */
+.details{margin-top:1.5rem;display:grid;gap:.8rem}
+.detail{display:flex;align-items:center;gap:.9rem;
+  background:#F7F4EA;border-radius:16px;padding:.85rem 1rem}
+.detail .ico{flex:0 0 44px;height:44px;border-radius:13px;background:var(--paper);
+  display:flex;align-items:center;justify-content:center;font-size:1.35rem;
+  box-shadow:inset 0 0 0 2px #E3DCC8}
+.detail .txt{flex:1;min-width:0}
+.detail .txt b{display:block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:#93A08F;font-weight:800}
+.detail .txt span{font-weight:700;font-size:1rem;color:var(--ink)}
+.mini-link{
+  display:inline-flex;align-items:center;gap:.3rem;
+  margin-top:.3rem;font-size:.8rem;font-weight:800;
+  color:var(--sage-deep);text-decoration:none;
+  border-bottom:1.5px solid #BFCFBB;padding-bottom:1px;
+  cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;
+  font-family:'Nunito',sans-serif;
+}
+.mini-link:active{opacity:.7}
+
+/* popover calendario */
+#cal-pop{
+  position:fixed;inset:0;z-index:200;display:none;
+  align-items:center;justify-content:center;
+  background:rgba(45,60,48,.45);backdrop-filter:blur(3px);
+  padding:20px;
+}
+#cal-pop.open{display:flex}
+.cal-box{
+  background:var(--paper);border-radius:22px;padding:1.6rem 1.4rem;
+  width:min(100%,340px);text-align:center;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  animation:calIn .3s cubic-bezier(.34,1.4,.5,1) both;
+}
+@keyframes calIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.cal-box h3{font-family:'Fredoka',sans-serif;font-weight:600;color:var(--sage-dark);
+  font-size:1.2rem;margin-bottom:1rem}
+.cal-opt{
+  display:flex;align-items:center;gap:.7rem;width:100%;
+  background:#F1F4EC;border:1.5px solid #DCE4D6;border-radius:14px;
+  padding:.85rem 1rem;margin-bottom:.6rem;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;color:var(--ink);
+  text-decoration:none;cursor:pointer;transition:background .15s;
+}
+.cal-opt:active{background:#E6ECDE}
+.cal-close{background:none;border:none;font-weight:800;color:#9AA79A;
+  font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-top:.3rem}
+
+/* CTA */
+.cta{margin-top:1.7rem;display:flex;flex-direction:column;gap:.7rem;align-items:center}
+.btn-wsp{
+  display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;
+  background:#3FA65B;color:#fff;text-decoration:none;
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.1rem;
+  padding:1rem 1.2rem;border-radius:18px;
+  box-shadow:0 6px 0 #2E7D45;transition:transform .15s, box-shadow .15s;
+}
+.btn-wsp:active{transform:translateY(4px);box-shadow:0 2px 0 #2E7D45}
+.cta small{color:#8B9A8C;font-weight:700}
+
+.gift-hint{margin-top:1.5rem;display:flex;align-items:center;gap:.8rem}
+.gift-line{flex:1;height:1px;background:#E0DACB}
+.gift-hint a{flex:0 1 auto;text-align:center;font-size:.86rem;font-weight:700;
+  color:#8B9A8C;text-decoration:none;line-height:1.45;max-width:250px;transition:color .2s}
+.gift-hint a:hover,.gift-hint a:active{color:var(--sage-deep);text-decoration:underline}
+
+.footer-note{text-align:center;margin-top:1.6rem;
+  font-family:'Caveat',cursive;font-weight:600;font-size:1.4rem;color:#7C9280}
+#replay{margin:1.2rem auto 0;display:block;background:none;border:none;cursor:pointer;
+  font-weight:800;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;
+  color:#A9B6A6;text-decoration:underline}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.15s !important}
+  .egg-idle,.fol-tl,.fol-tr,.fol-bl,.fol-br,#dino.hatch #dino-inner,.dino-mini .float{animation:none !important}
+}
+</style>
+</head>
+<body>
+
+<button id="mute-btn" aria-label="Activar o silenciar sonido" title="Sonido">🔊</button>
+
+<!-- filtros y gradientes compartidos -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- borde acuarela irregular -->
+    <filter id="wc" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="7"/>
+    </filter>
+    <filter id="wc-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4"/>
+    </filter>
+    <!-- textura de papel/acuarela sobre el huevo -->
+    <filter id="paper-grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0.55  0 0 0 0 0.47  0 0 0 0 0.33  0 0 0 .06 0"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+      <feBlend in="SourceGraphic" mode="multiply"/>
+    </filter>
+    <linearGradient id="dinoBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ADD3A3"/>
+      <stop offset=".55" stop-color="#93C293"/>
+      <stop offset="1" stop-color="#79AC80"/>
+    </linearGradient>
+    <linearGradient id="dinoBelly" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EAF4DE"/>
+      <stop offset="1" stop-color="#CFE4C4"/>
+    </linearGradient>
+    <linearGradient id="crestGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7FAF7C"/>
+      <stop offset="1" stop-color="#5E8C61"/>
+    </linearGradient>
+    <linearGradient id="eggGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F5E9CF"/>
+      <stop offset=".6" stop-color="#EAD9B8"/>
+      <stop offset="1" stop-color="#D8C29A"/>
+    </linearGradient>
+    <linearGradient id="leafA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A9C79C"/>
+      <stop offset="1" stop-color="#7C9F76"/>
+    </linearGradient>
+    <linearGradient id="leafB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#C4D9B2"/>
+      <stop offset="1" stop-color="#93B389"/>
+    </linearGradient>
+    <linearGradient id="leafC" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#8FB4A0"/>
+      <stop offset="1" stop-color="#B8D2BB"/>
+    </linearGradient>
+    <radialGradient id="cheek" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#F5B9A6" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#F5B9A6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<!-- ══════════ ESCENA 1 ══════════ -->
+<section id="scene-egg" aria-label="Toca el huevo para abrir la invitación">
+  <div class="wash wash-1"></div><div class="wash wash-2"></div>
+  <div class="wash wash-3"></div><div class="wash wash-4"></div>
+
+  <!-- follaje monstera + helecho, estilo acuarela -->
+  <div class="foliage fol-tl"><svg viewBox="0 0 300 300">
+    <g filter="url(#wc)">
+      <path d="M30 10 C120 20 190 80 200 170 C130 175 60 130 38 60 Z" fill="url(#leafA)" opacity=".95"/>
+      <ellipse cx="118" cy="86" rx="14" ry="8" fill="#FBF7EE" transform="rotate(35 118 86)"/>
+      <ellipse cx="150" cy="126" rx="16" ry="9" fill="#FBF7EE" transform="rotate(35 150 126)"/>
+      <path d="M10 60 C70 90 110 150 112 230 C60 210 20 150 8 90 Z" fill="url(#leafB)" opacity=".9"/>
+      <path d="M0 140 q60 10 84 96 q-64 -6 -84 -60z" fill="url(#leafC)" opacity=".85"/>
+    </g>
+    <path d="M32 12 C110 40 170 100 196 166 M14 62 C60 110 96 170 110 226" stroke="#5E8C61" stroke-width="4" fill="none" opacity=".5" stroke-linecap="round" filter="url(#wc-soft)"/>
+  </svg></div>
+
+  <div class="foliage fol-tr"><svg viewBox="0 0 300 300">
+    <g filter="url(#wc)">
+      <path d="M40 6 C140 14 220 84 232 190 C150 194 68 140 44 62 Z" fill="url(#leafB)" opacity=".95"/>
+      <ellipse cx="140" cy="95" rx="16" ry="9" fill="#FBF7EE" transform="rotate(38 140 95)"/>
+      <ellipse cx="176" cy="140" rx="18" ry="10" fill="#FBF7EE" transform="rotate(38 176 140)"/>
+      <path d="M8 66 C80 96 130 170 132 258 C70 232 24 160 6 96 Z" fill="url(#leafA)" opacity=".85"/>
+    </g>
+    <!-- helecho -->
+    <g filter="url(#wc-soft)" opacity=".8">
+      <path d="M250 40 q-10 90 -60 160" stroke="#6E9C6E" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <g fill="#93B389">
+        <ellipse cx="238" cy="70" rx="20" ry="6" transform="rotate(24 238 70)"/>
+        <ellipse cx="230" cy="100" rx="22" ry="6.5" transform="rotate(30 230 100)"/>
+        <ellipse cx="218" cy="132" rx="23" ry="7" transform="rotate(36 218 132)"/>
+        <ellipse cx="204" cy="164" rx="22" ry="6.5" transform="rotate(42 204 164)"/>
+      </g>
+    </g>
+  </svg></div>
+
+  <div class="foliage fol-bl"><svg viewBox="0 0 300 300">
+    <g filter="url(#wc)">
+      <path d="M20 290 C30 190 100 120 210 108 C196 214 120 274 20 290 Z" fill="url(#leafA)" opacity=".95"/>
+      <ellipse cx="120" cy="200" rx="16" ry="9" fill="#FBF7EE" transform="rotate(-38 120 200)"/>
+      <path d="M0 220 q70 -4 110 74 q-76 4 -110 -40z" fill="url(#leafC)" opacity=".85"/>
+    </g>
+  </svg></div>
+
+  <div class="foliage fol-br"><svg viewBox="0 0 300 300">
+    <g filter="url(#wc)">
+      <path d="M16 292 C28 184 104 112 220 102 C204 216 124 278 16 292 Z" fill="url(#leafB)" opacity=".95"/>
+      <ellipse cx="130" cy="196" rx="17" ry="9" fill="#FBF7EE" transform="rotate(-36 130 196)"/>
+      <ellipse cx="164" cy="162" rx="15" ry="8" fill="#FBF7EE" transform="rotate(-36 164 162)"/>
+    </g>
+    <!-- florcitas azules acuarela -->
+    <g filter="url(#wc-soft)">
+      <g transform="translate(226 236)"><circle r="9" fill="#8FB2CE"/><circle cx="14" r="9" fill="#A3C1D8"/><circle cx="7" cy="12" r="9" fill="#7FA5BD"/><circle cx="7" cy="5" r="4" fill="#41618F"/></g>
+      <g transform="translate(190 268)"><circle r="7" fill="#A3C1D8"/><circle cx="11" r="7" fill="#8FB2CE"/><circle cx="5.5" cy="9" r="7" fill="#7FA5BD"/><circle cx="5.5" cy="4" r="3.2" fill="#41618F"/></g>
+    </g>
+  </svg></div>
+
+  <h1 class="scene-title">Algo está por nacer…</h1>
+  <p class="scene-sub">🥚 ¡Toca el huevo para descubrirlo!</p>
+
+  <div id="egg-stage" role="button" aria-label="Huevo de dinosaurio, tócalo tres veces para romperlo" tabindex="0">
+    <div id="rawr">¡RAWR!</div>
+    <svg id="egg-svg" viewBox="0 0 300 360">
+      <!-- sombra + pasto acuarela -->
+      <ellipse cx="150" cy="336" rx="118" ry="18" fill="#6E9C6E" opacity=".22"/>
+      <g filter="url(#wc-soft)">
+        <ellipse cx="150" cy="332" rx="124" ry="22" fill="#A9C79E"/>
+        <ellipse cx="150" cy="330" rx="98" ry="16" fill="#BCD4AE"/>
+      </g>
+      <path d="M52 328 q6 -28 13 0 M78 331 q8 -34 15 0 M206 328 q7 -26 13 0 M230 331 q8 -32 15 0 M112 334 q5 -20 10 0 M186 334 q5 -22 10 0"
+            stroke="#7FA379" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#wc-soft)"/>
+
+      <g id="egg-group" class="egg-idle">
+        <!-- ── DINO ── -->
+        <g id="dino"><g id="dino-inner">
+          <!-- cola -->
+          <path d="M198 252 q52 8 44 -38 q26 30 -8 54 q-22 14 -38 -14z" fill="url(#dinoBody)" filter="url(#wc-soft)"/>
+          <path d="M214 250 q30 2 28 -22" stroke="#5E8C61" stroke-width="3" fill="none" opacity=".4" stroke-linecap="round"/>
+          <!-- cuerpo -->
+          <ellipse cx="150" cy="238" rx="60" ry="54" fill="url(#dinoBody)" filter="url(#wc-soft)"/>
+          <!-- panza con placas -->
+          <ellipse cx="150" cy="254" rx="36" ry="32" fill="url(#dinoBelly)" filter="url(#wc-soft)"/>
+          <path d="M122 244 h56 M120 258 h60 M124 272 h52" stroke="#AFC9A2" stroke-width="2.4" opacity=".7" stroke-linecap="round"/>
+          <!-- brazos con garritas -->
+          <g fill="url(#dinoBody)">
+            <ellipse cx="104" cy="252" rx="14" ry="20" transform="rotate(20 104 252)" filter="url(#wc-soft)"/>
+            <ellipse cx="196" cy="252" rx="14" ry="20" transform="rotate(-20 196 252)" filter="url(#wc-soft)"/>
+          </g>
+          <path d="M96 266 l-4 6 M102 269 l-2 7 M204 266 l4 6 M198 269 l2 7" stroke="#5E8C61" stroke-width="2.6" stroke-linecap="round" opacity=".7"/>
+          <!-- cabeza -->
+          <circle cx="150" cy="174" r="54" fill="url(#dinoBody)" filter="url(#wc-soft)"/>
+          <!-- brillo acuarela en la cabeza -->
+          <ellipse cx="128" cy="146" rx="22" ry="14" fill="#CFE6C4" opacity=".55" transform="rotate(-24 128 146)"/>
+          <!-- crestas -->
+          <g fill="url(#crestGrad)" filter="url(#wc-soft)">
+            <path d="M112 140 q6 -26 24 -8z"/>
+            <path d="M138 126 q10 -28 26 -4z"/>
+            <path d="M166 130 q14 -24 24 2z"/>
+          </g>
+          <!-- mejillas -->
+          <circle cx="116" cy="192" r="12" fill="url(#cheek)"/>
+          <circle cx="184" cy="192" r="12" fill="url(#cheek)"/>
+          <!-- ojos grandes con doble brillo -->
+          <g id="eyes-main">
+            <ellipse cx="130" cy="172" rx="12" ry="13" fill="#2F3B31"/>
+            <ellipse cx="170" cy="172" rx="12" ry="13" fill="#2F3B31"/>
+            <circle cx="134" cy="167" r="4" fill="#fff"/>
+            <circle cx="174" cy="167" r="4" fill="#fff"/>
+            <circle cx="127" cy="176" r="1.8" fill="#fff" opacity=".8"/>
+            <circle cx="167" cy="176" r="1.8" fill="#fff" opacity=".8"/>
+            <ellipse class="eyelid" cx="130" cy="172" rx="12.6" ry="13.6" fill="#93C293"/>
+            <ellipse class="eyelid" cx="170" cy="172" rx="12.6" ry="13.6" fill="#93C293"/>
+          </g>
+          <!-- sonrisa con lengüita -->
+          <path d="M134 198 q16 14 32 0" stroke="#2F3B31" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          <path d="M144 203 q6 6 12 0 q-2 6 -6 6 q-4 0 -6 -6z" fill="#E58A7C"/>
+          <circle cx="142" cy="186" r="2.3" fill="#5C7A5E"/>
+          <circle cx="158" cy="186" r="2.3" fill="#5C7A5E"/>
+          <!-- manchitas -->
+          <g fill="#6FA070" opacity=".65">
+            <circle cx="110" cy="152" r="5.5"/><circle cx="192" cy="156" r="4.5"/>
+            <circle cx="120" cy="228" r="5"/><circle cx="184" cy="226" r="4.5"/>
+          </g>
+          <!-- pedacito de cáscara en la cabeza -->
+          <g transform="rotate(-10 150 122)" filter="url(#wc-soft)">
+            <path d="M132 128 L142 112 L152 124 L162 110 L170 126 L166 134 Q150 142 136 134 Z" fill="url(#eggGrad)"/>
+            <circle cx="150" cy="126" r="3.4" fill="#B8D4C2"/>
+          </g>
+        </g></g>
+
+        <!-- ── base del huevo ── -->
+        <g id="egg-bottom" filter="url(#wc-soft)">
+          <path d="M62 252 L84 264 L104 248 L124 266 L148 248 L172 266 L194 248 L216 264 L238 252 L238 260 C238 310 200 338 150 338 C100 338 62 310 62 260 Z" fill="url(#eggGrad)"/>
+          <path d="M70 290 C80 318 110 332 150 332" stroke="#C4AC82" stroke-width="5" fill="none" opacity=".45" stroke-linecap="round"/>
+          <circle cx="100" cy="300" r="10" fill="#B8D4C2" opacity=".9"/>
+          <circle cx="176" cy="316" r="7" fill="#B8D4C2" opacity=".9"/>
+          <circle cx="212" cy="288" r="6" fill="#B8D4C2" opacity=".9"/>
+          <circle cx="132" cy="318" r="4" fill="#CBB58C"/>
+        </g>
+
+        <!-- ── tapa del huevo ── -->
+        <g id="egg-top">
+          <g filter="url(#wc-soft)">
+            <path d="M150 22 C224 22 242 130 240 252 L218 264 L196 248 L172 266 L148 248 L124 266 L104 248 L84 264 L62 252 C58 130 76 22 150 22 Z" fill="url(#eggGrad)"/>
+            <ellipse cx="116" cy="92" rx="28" ry="38" fill="#FBF3DE" opacity=".85" transform="rotate(-14 116 92)"/>
+            <circle cx="178" cy="84" r="12" fill="#B8D4C2" opacity=".95"/>
+            <circle cx="120" cy="176" r="9" fill="#B8D4C2" opacity=".95"/>
+            <circle cx="198" cy="166" r="7" fill="#B8D4C2" opacity=".95"/>
+            <circle cx="88" cy="130" r="6" fill="#B8D4C2" opacity=".95"/>
+            <circle cx="152" cy="120" r="4" fill="#CBB58C" opacity=".8"/>
+            <circle cx="200" cy="220" r="5" fill="#CBB58C" opacity=".6"/>
+          </g>
+          <!-- grietas -->
+          <path class="crack" id="crack1" d="M150 250 L141 220 L157 198 L144 174"/>
+          <path class="crack" id="crack2" d="M106 252 L118 222 L102 202 M198 250 L187 218 L200 196"/>
+          <path class="crack" id="crack3" d="M144 174 L129 152 L142 128 M200 196 L214 170 M102 202 L86 180 M157 198 L172 182"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div id="tap-hint">
+    <span class="tap-dot" data-dot="1"></span>
+    <span class="tap-dot" data-dot="2"></span>
+    <span class="tap-dot" data-dot="3"></span>
+    <span id="tap-label">toca 3 veces</span>
+  </div>
+</section>
+
+<!-- ══════════ ESCENA 2 ══════════ -->
+<section id="scene-invite">
+  <div class="card" id="card">
+    <div class="card-foliage cf-tl"><svg viewBox="0 0 200 200">
+      <g filter="url(#wc)">
+        <path d="M14 6 C90 14 148 66 156 140 C96 144 40 104 20 48 Z" fill="url(#leafB)" opacity=".8"/>
+        <ellipse cx="84" cy="66" rx="11" ry="6" fill="#FFFDF8" transform="rotate(36 84 66)"/>
+        <path d="M4 52 C50 76 82 130 84 190 C42 172 12 120 2 74 Z" fill="url(#leafA)" opacity=".7"/>
+      </g>
+    </svg></div>
+    <div class="card-foliage cf-br"><svg viewBox="0 0 200 200">
+      <g filter="url(#wc)">
+        <path d="M12 194 C22 116 76 66 158 58 C146 138 88 182 12 194 Z" fill="url(#leafB)" opacity=".8"/>
+        <ellipse cx="88" cy="132" rx="12" ry="6.5" fill="#FFFDF8" transform="rotate(-36 88 132)"/>
+      </g>
+      <g filter="url(#wc-soft)">
+        <g transform="translate(150 158)"><circle r="7" fill="#8FB2CE"/><circle cx="11" r="7" fill="#A3C1D8"/><circle cx="5.5" cy="9" r="7" fill="#7FA5BD"/><circle cx="5.5" cy="4" r="3" fill="#41618F"/></g>
+      </g>
+    </svg></div>
+
+    <p class="eyebrow reveal rel">Baby Shower</p>
+    <h1 class="rawr-title reveal rel">¡RAWR!</h1>
+    <p class="subtitle reveal rel">Un pequeño dino está en camino 🦕</p>
+
+    <div class="dino-mini reveal rel">
+      <svg viewBox="0 0 300 250">
+        <ellipse cx="150" cy="224" rx="100" ry="15" fill="#DDE9D4" filter="url(#wc-soft)"/>
+        <g class="float">
+          <g filter="url(#wc-soft)">
+            <path d="M78 168 L96 178 L114 164 L132 180 L150 164 L168 180 L186 164 L204 178 L222 168 L222 178 C222 204 198 224 150 224 C102 224 78 204 78 178 Z" fill="url(#eggGrad)"/>
+            <circle cx="106" cy="200" r="7" fill="#B8D4C2"/>
+            <circle cx="182" cy="206" r="5" fill="#B8D4C2"/>
+          </g>
+          <g>
+            <path d="M188 176 q38 6 32 -26 q18 22 -6 38 q-14 8 -26 -12z" fill="url(#dinoBody)" filter="url(#wc-soft)"/>
+            <ellipse cx="150" cy="158" rx="46" ry="40" fill="url(#dinoBody)" filter="url(#wc-soft)"/>
+            <ellipse cx="150" cy="168" rx="27" ry="23" fill="url(#dinoBelly)" filter="url(#wc-soft)"/>
+            <path d="M130 160 h40 M128 172 h44" stroke="#AFC9A2" stroke-width="2" opacity=".7" stroke-linecap="round"/>
+            <circle cx="150" cy="104" r="42" fill="url(#dinoBody)" filter="url(#wc-soft)"/>
+            <ellipse cx="132" cy="82" rx="16" ry="10" fill="#CFE6C4" opacity=".55" transform="rotate(-24 132 82)"/>
+            <g fill="url(#crestGrad)" filter="url(#wc-soft)">
+              <path d="M122 78 q6 -20 20 -6z"/><path d="M142 66 q9 -22 22 -3z"/><path d="M164 70 q11 -18 19 2z"/>
+            </g>
+            <circle cx="124" cy="118" r="9" fill="url(#cheek)"/>
+            <circle cx="176" cy="118" r="9" fill="url(#cheek)"/>
+            <g id="eyes-mini">
+              <ellipse cx="135" cy="101" rx="9.5" ry="10.5" fill="#2F3B31"/>
+              <ellipse cx="165" cy="101" rx="9.5" ry="10.5" fill="#2F3B31"/>
+              <circle cx="138" cy="97" r="3.2" fill="#fff"/>
+              <circle cx="168" cy="97" r="3.2" fill="#fff"/>
+              <ellipse class="eyelid" cx="135" cy="101" rx="10" ry="11" fill="#93C293"/>
+              <ellipse class="eyelid" cx="165" cy="101" rx="10" ry="11" fill="#93C293"/>
+            </g>
+            <path d="M138 121 q12 10 24 0" stroke="#2F3B31" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+            <path d="M146 125 q4 4 8 0 q-1 4 -4 4 q-3 0 -4 -4z" fill="#E58A7C"/>
+            <circle cx="144" cy="112" r="1.9" fill="#5C7A5E"/>
+            <circle cx="156" cy="112" r="1.9" fill="#5C7A5E"/>
+            <g transform="rotate(-10 150 66)" filter="url(#wc-soft)">
+              <path d="M136 70 L144 58 L152 68 L160 56 L166 70 L163 76 Q150 82 139 76 Z" fill="url(#eggGrad)"/>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <p class="invite-text reveal rel">Acompáñanos a celebrar la llegada<br>de nuestro bebé. Con mucho amor,</p>
+    <p class="parents reveal rel">Adaliz &amp; Henry</p>
+
+    <div class="baby-name reveal rel">
+      <p class="label">Muy pronto conoceremos a</p>
+      <p class="name">Aldric Khael</p>
+      <p class="paws">🐾 🦖 🐾</p>
+    </div>
+
+    <div class="countdown reveal rel">
+      <p class="cd-label">Faltan</p>
+      <div class="cd-grid">
+        <div class="cd-box"><b id="cd-d">--</b><span>días</span></div>
+        <div class="cd-box"><b id="cd-h">--</b><span>horas</span></div>
+        <div class="cd-box"><b id="cd-m">--</b><span>min</span></div>
+        <div class="cd-box"><b id="cd-s">--</b><span>seg</span></div>
+      </div>
+    </div>
+
+    <div class="details">
+      <div class="detail reveal rel">
+        <div class="ico">📅</div>
+        <div class="txt">
+          <b>Fecha</b><span id="fecha-txt">Sábado 8 de agosto</span><br>
+          <button class="mini-link" id="btn-cal">🗓️ Agregar al calendario</button>
+        </div>
+      </div>
+      <div class="detail reveal rel">
+        <div class="ico">🕑</div>
+        <div class="txt"><b>Hora</b><span>Desde las 2:00 pm</span></div>
+      </div>
+      <div class="detail reveal rel">
+        <div class="ico">📍</div>
+        <div class="txt">
+          <b>Lugar</b><span>Av. Los Pinos 371, Chorrillos</span><br>
+          <a class="mini-link" id="btn-mapa" href="#" target="_blank" rel="noopener">🗺️ Ver en mapa</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta reveal rel">
+      <a class="btn-wsp" id="btn-wsp" href="#" target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-2-1.2 7.4 7.4 0 0 1-1.4-1.7c-.1-.3 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5s0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4 15 15 0 0 0 1.5.6 3.6 3.6 0 0 0 1.7.1 2.8 2.8 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg>
+        Confirmar asistencia
+      </a>
+      <small>WhatsApp · +51 950 804 785</small>
+    </div>
+
+    <div class="gift-hint reveal rel">
+      <span class="gift-line"></span>
+      <a id="btn-regalos" href="#" target="_blank" rel="noopener">
+        🎁 Si deseas hacerle un regalito a Aldric, mira nuestra lista de sugerencias
+      </a>
+      <span class="gift-line"></span>
+    </div>
+
+    <p class="footer-note reveal rel">¡Te esperamos con las garras abiertas! 🦖💚</p>
+    <button id="replay">🥚 ver la animación otra vez</button>
+  </div>
+</section>
+
+<!-- popover calendario -->
+<div id="cal-pop" role="dialog" aria-label="Agregar al calendario">
+  <div class="cal-box">
+    <h3>🗓️ Agregar al calendario</h3>
+    <a class="cal-opt" id="cal-google" href="#" target="_blank" rel="noopener">📆 Google Calendar</a>
+    <button class="cal-opt" id="cal-ics">🍎 iPhone / Outlook (.ics)</button>
+    <button class="cal-close" id="cal-close">Cerrar</button>
+  </div>
+</div>
+
+<script>
+/* ═══════════ CONFIGURACIÓN — edita aquí ═══════════ */
+const CONFIG = {
+  fechaTexto : "Sábado 8 de agosto",
+  // Fecha/hora del evento (hora local de Lima)
+  inicio     : new Date(2026, 7, 8, 14, 0, 0),   // 8 ago 2026, 2:00 pm
+  fin        : new Date(2026, 7, 8, 19, 0, 0),   // hora estimada de cierre
+  lugar      : "Av. Los Pinos 371, Chorrillos, Lima, Perú",
+  whatsapp   : "51950804785",
+  mensajeWsp : "¡Hola! Confirmo mi asistencia al baby shower de Aldric Khael 🦖💚",
+  regalos    : "https://onelist.pe/listas/w4jtyleil18ohtpw/invitado/",
+  tituloEvento: "🦕 Baby Shower de Aldric Khael",
+  descEvento : "Adaliz & Henry te esperan para celebrar la llegada de Aldric Khael. Confirmar al WhatsApp +51 950 804 785"
+};
+/* ══════════════════════════════════════════════════ */
+
+/* ---------- enlaces ---------- */
+document.getElementById('fecha-txt').textContent = CONFIG.fechaTexto;
+document.getElementById('btn-wsp').href =
+  `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.mensajeWsp)}`;
+document.getElementById('btn-regalos').href = CONFIG.regalos;
+document.getElementById('btn-mapa').href =
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONFIG.lugar)}`;
+
+/* ---------- calendario ---------- */
+function pad(n){return String(n).padStart(2,'0')}
+function icsDate(d){
+  return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'T'+pad(d.getHours())+pad(d.getMinutes())+'00';
+}
+const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE`+
+  `&text=${encodeURIComponent(CONFIG.tituloEvento)}`+
+  `&dates=${icsDate(CONFIG.inicio)}/${icsDate(CONFIG.fin)}`+
+  `&ctz=America/Lima`+
+  `&details=${encodeURIComponent(CONFIG.descEvento)}`+
+  `&location=${encodeURIComponent(CONFIG.lugar)}`;
+document.getElementById('cal-google').href = gcalUrl;
+
+document.getElementById('cal-ics').addEventListener('click', ()=>{
+  const ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//BabyShower//AldricKhael//ES',
+    'BEGIN:VEVENT',
+    'UID:'+Date.now()+'@babyshower-aldric',
+    'DTSTAMP:'+icsDate(new Date()),
+    'DTSTART;TZID=America/Lima:'+icsDate(CONFIG.inicio),
+    'DTEND;TZID=America/Lima:'+icsDate(CONFIG.fin),
+    'SUMMARY:'+CONFIG.tituloEvento,
+    'DESCRIPTION:'+CONFIG.descEvento,
+    'LOCATION:'+CONFIG.lugar,
+    'END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], {type:'text/calendar'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'baby-shower-aldric-khael.ics';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+const calPop = document.getElementById('cal-pop');
+document.getElementById('btn-cal').addEventListener('click', ()=>{ calPop.classList.add('open'); playClick(); });
+document.getElementById('cal-close').addEventListener('click', ()=> calPop.classList.remove('open'));
+calPop.addEventListener('click', e=>{ if(e.target===calPop) calPop.classList.remove('open'); });
+
+/* ---------- contador ---------- */
+let prev = {};
+function tickCountdown(){
+  const diff = CONFIG.inicio - new Date();
+  const el = {d:document.getElementById('cd-d'),h:document.getElementById('cd-h'),
+              m:document.getElementById('cd-m'),s:document.getElementById('cd-s')};
+  if (diff <= 0){
+    el.d.textContent='🦖'; el.h.textContent='0'; el.m.textContent='0'; el.s.textContent='0';
+    document.querySelector('.cd-label').textContent = '¡Es hoy!';
+    return;
+  }
+  const v = {
+    d: Math.floor(diff/86400000),
+    h: Math.floor(diff/3600000)%24,
+    m: Math.floor(diff/60000)%60,
+    s: Math.floor(diff/1000)%60
+  };
+  for (const k of ['d','h','m','s']){
+    const t = k==='d' ? v[k] : pad(v[k]);
+    if (prev[k] !== t){
+      el[k].textContent = t;
+      el[k].parentElement.classList.remove('cd-flip');
+      void el[k].parentElement.offsetWidth;
+      el[k].parentElement.classList.add('cd-flip');
+      prev[k] = t;
+    }
+  }
+}
+setInterval(tickCountdown, 1000);
+tickCountdown();
+
+/* ═══════════ AUDIO (Web Audio API, sin archivos) ═══════════ */
+let AC = null, master = null, musicOn = true, musicTimer = null;
+const muteBtn = document.getElementById('mute-btn');
+
+function audio(){
+  if (!AC){
+    AC = new (window.AudioContext || window.webkitAudioContext)();
+    master = AC.createGain();
+    master.gain.value = musicOn ? 1 : 0;
+    master.connect(AC.destination);
+  }
+  if (AC.state === 'suspended') AC.resume();
+  return AC;
+}
+muteBtn.addEventListener('click', ()=>{
+  musicOn = !musicOn;
+  muteBtn.textContent = musicOn ? '🔊' : '🔇';
+  if (master) master.gain.setTargetAtTime(musicOn?1:0, AC.currentTime, .05);
+  if (typeof rawrEl !== 'undefined') rawrEl.volume = musicOn ? .9 : 0;
+});
+
+/* golpecito / clic */
+function playClick(){
+  if (!AC) return;
+  const t = AC.currentTime;
+  const o = AC.createOscillator(), g = AC.createGain();
+  o.type='triangle'; o.frequency.setValueAtTime(660,t);
+  g.gain.setValueAtTime(.12,t); g.gain.exponentialRampToValueAtTime(.001,t+.12);
+  o.connect(g); g.connect(master); o.start(t); o.stop(t+.14);
+}
+
+/* crack: ráfaga de ruido + golpe grave */
+function playCrack(intensidad){
+  const ctx = audio(), t = ctx.currentTime;
+  const dur = .18 + intensidad*.06;
+  const buf = ctx.createBuffer(1, ctx.sampleRate*dur, ctx.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i=0;i<d.length;i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/d.length, 1.6);
+  const src = ctx.createBufferSource(); src.buffer = buf;
+  const f = ctx.createBiquadFilter(); f.type='bandpass';
+  f.frequency.value = 1800 - intensidad*350; f.Q.value = .8;
+  const g = ctx.createGain(); g.gain.value = .5 + intensidad*.15;
+  src.connect(f); f.connect(g); g.connect(master); src.start(t);
+  // golpe grave
+  const o = ctx.createOscillator(), og = ctx.createGain();
+  o.type='sine'; o.frequency.setValueAtTime(150,t);
+  o.frequency.exponentialRampToValueAtTime(55,t+.16);
+  og.gain.setValueAtTime(.5,t); og.gain.exponentialRampToValueAtTime(.001,t+.2);
+  o.connect(og); og.connect(master); o.start(t); o.stop(t+.22);
+}
+
+/* pop de la cáscara */
+function playPop(){
+  const ctx = audio(), t = ctx.currentTime;
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  o.type='sine';
+  o.frequency.setValueAtTime(320,t);
+  o.frequency.exponentialRampToValueAtTime(900,t+.09);
+  g.gain.setValueAtTime(.4,t); g.gain.exponentialRampToValueAtTime(.001,t+.16);
+  o.connect(g); g.connect(master); o.start(t); o.stop(t+.18);
+}
+
+/* campanitas de confetti */
+function playSparkles(){
+  const ctx = audio(), t = ctx.currentTime;
+  [1046,1318,1568,2093].forEach((f,i)=>{
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type='sine'; o.frequency.value = f;
+    const tt = t + i*.09;
+    g.gain.setValueAtTime(.14,tt); g.gain.exponentialRampToValueAtTime(.001,tt+.5);
+    o.connect(g); g.connect(master); o.start(tt); o.stop(tt+.55);
+  });
+}
+
+/* rugido del dino (audio embebido en base64, funciona offline) */
+const RAWR_B64 = "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";
+
+// bytes decodificados una sola vez (compatible con Safari: sin fetch de data-URI)
+function rawrBytes(){
+  const bin = atob(RAWR_B64);
+  const u8 = new Uint8Array(bin.length);
+  for (let i=0;i<bin.length;i++) u8[i] = bin.charCodeAt(i);
+  return u8.buffer;
+}
+
+let rawrBuf = null, rawrLoading = false;
+function loadRawr(){
+  if (rawrBuf || rawrLoading || !AC) return;
+  rawrLoading = true;
+  // decodeAudioData con doble firma: promesa (moderno) y callback (Safari viejo)
+  try {
+    const p = AC.decodeAudioData(rawrBytes(),
+      buf => { rawrBuf = buf; },
+      ()  => { rawrLoading = false; });
+    if (p && p.then) p.then(buf => { rawrBuf = buf; }).catch(()=>{ rawrLoading = false; });
+  } catch(e) { rawrLoading = false; }
+}
+
+// plan B: elemento <audio> con data-URI (funciona en todos lados)
+const rawrEl = new Audio("data:audio/mpeg;base64," + RAWR_B64);
+rawrEl.preload = "auto";
+
+function playRawr(){
+  if (AC && rawrBuf) {
+    const src = AC.createBufferSource();
+    src.buffer = rawrBuf;
+    const g = AC.createGain(); g.gain.value = .9;
+    src.connect(g); g.connect(master);
+    src.start();
+  } else {
+    // fallback directo
+    rawrEl.volume = musicOn ? .9 : 0;
+    rawrEl.currentTime = 0;
+    rawrEl.play().catch(()=>{});
+  }
+}
+
+/* música de fondo: cajita musical (loop suave) */
+const MELODY = [ // [nota Hz, duración en pulsos] — nana pentatónica
+  [523.25,1],[659.25,1],[783.99,2],[659.25,1],[523.25,1],[587.33,2],
+  [659.25,1],[783.99,1],[880.00,2],[783.99,1],[659.25,1],[523.25,2],
+  [587.33,1],[659.25,1],[587.33,1],[523.25,1],[440.00,2],[523.25,2]
+];
+function startMusic(){
+  const ctx = audio();
+  const beat = .42;
+  const musicGain = ctx.createGain();
+  musicGain.gain.value = 0;
+  musicGain.gain.setTargetAtTime(.16, ctx.currentTime, 1.2); // fade in
+  const delay = ctx.createDelay(); delay.delayTime.value = beat*1.5;
+  const fb = ctx.createGain(); fb.gain.value = .22;
+  delay.connect(fb); fb.connect(delay);
+  musicGain.connect(master); delay.connect(musicGain);
+
+  let idx = 0, nextT = ctx.currentTime + .3;
+  function schedule(){
+    while (nextT < ctx.currentTime + 1.2){
+      const [f,durP] = MELODY[idx % MELODY.length];
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type='sine'; o.frequency.value = f*2; // registro de cajita musical
+      g.gain.setValueAtTime(.001,nextT);
+      g.gain.exponentialRampToValueAtTime(.5,nextT+.02);
+      g.gain.exponentialRampToValueAtTime(.001,nextT+beat*durP*.95);
+      o.connect(g); g.connect(musicGain); g.connect(delay);
+      o.start(nextT); o.stop(nextT+beat*durP);
+      nextT += beat*durP;
+      idx++;
+      if (idx % MELODY.length === 0) nextT += beat; // respiro entre loops
+    }
+  }
+  schedule();
+  musicTimer = setInterval(schedule, 400);
+}
+
+/* ═══════════ INTERACCIÓN DEL HUEVO ═══════════ */
+const eggStage = document.getElementById('egg-stage');
+const eggGroup = document.getElementById('egg-group');
+const eggTop   = document.getElementById('egg-top');
+const dino     = document.getElementById('dino');
+const rawr     = document.getElementById('rawr');
+const sceneEgg = document.getElementById('scene-egg');
+const sceneInv = document.getElementById('scene-invite');
+const card     = document.getElementById('card');
+const tapLabel = document.getElementById('tap-label');
+let taps = 0, hatched = false;
+
+function crack(){
+  if (hatched) return;
+  audio(); // desbloquea audio con el gesto del usuario
+  loadRawr(); // precarga el rugido
+  taps++;
+  playCrack(taps);
+  const c = document.getElementById('crack'+Math.min(taps,3));
+  if (c) c.classList.add('show');
+  eggGroup.classList.remove('egg-idle','egg-shake');
+  void eggGroup.offsetWidth;
+  eggGroup.classList.add('egg-shake');
+  const dot = document.querySelector(`.tap-dot[data-dot="${taps}"]`);
+  if (dot) dot.classList.add('on');
+  if (navigator.vibrate) navigator.vibrate(30);
+  if (taps === 1) tapLabel.textContent = '¡se está moviendo!';
+  if (taps === 2) tapLabel.textContent = '¡una vez más!';
+  if (taps >= 3) hatch();
+}
+
+function hatch(){
+  hatched = true;
+  tapLabel.textContent = '🎉';
+  setTimeout(()=>{
+    playPop();
+    eggTop.classList.add('pop');
+    dino.classList.add('hatch');
+    if (navigator.vibrate) navigator.vibrate([50,40,90]);
+  }, 320);
+  setTimeout(()=>{
+    rawr.classList.add('show');
+    playRawr();          // 🦖 tu rugido
+    confetti();
+    burstSparkles();
+  }, 780);
+  setTimeout(()=> playSparkles(), 1650); // campanitas tras el rugido
+  setTimeout(()=>{
+    sceneEgg.classList.add('done');
+    sceneInv.classList.add('show');
+    startMusic();
+    requestAnimationFrame(()=>{
+      card.classList.add('in');
+      document.querySelectorAll('.reveal').forEach((el,i)=>{
+        setTimeout(()=>el.classList.add('in'), 260 + i*120);
+      });
+    });
+    window.scrollTo(0,0);
+    startBlinking('eyes-mini');
+  }, 2800);
+  startBlinking('eyes-main');
+}
+
+/* parpadeo aleatorio */
+function startBlinking(id){
+  const eyes = document.getElementById(id);
+  if (!eyes) return;
+  (function loop(){
+    setTimeout(()=>{
+      eyes.classList.add('blink');
+      setTimeout(()=>eyes.classList.remove('blink'), 130);
+      loop();
+    }, 2200 + Math.random()*2600);
+  })();
+}
+
+function confetti(){
+  const emojis = ['🍃','🌿','🥚','💚','🦕','✨','🍃'];
+  for (let i=0;i<30;i++){
+    const s = document.createElement('span');
+    s.className = 'confetti';
+    s.textContent = emojis[i % emojis.length];
+    s.style.left = Math.random()*100 + 'vw';
+    s.style.fontSize = (15 + Math.random()*18) + 'px';
+    s.style.animation = `fall ${2.6 + Math.random()*2.2}s linear ${Math.random()*.9}s forwards`;
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(), 6500);
+  }
+}
+function burstSparkles(){
+  const r = eggStage.getBoundingClientRect();
+  for (let i=0;i<10;i++){
+    const s = document.createElement('span');
+    s.className='sparkle'; s.textContent='✨';
+    const ang = (i/10)*Math.PI*2;
+    s.style.left = (r.left + r.width/2 + Math.cos(ang)*(r.width*.5)) + 'px';
+    s.style.top  = (r.top + r.height*.35 + Math.sin(ang)*(r.height*.32)) + 'px';
+    s.style.animationDelay = (Math.random()*.25)+'s';
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(), 1400);
+  }
+}
+
+eggStage.addEventListener('click', crack);
+eggStage.addEventListener('keydown', e=>{
+  if (e.key==='Enter'||e.key===' '){ e.preventDefault(); crack(); }
+});
+document.getElementById('replay').addEventListener('click', ()=>{
+  if (musicTimer) clearInterval(musicTimer);
+  location.reload();
+});
+</script>
+</body>
+</html>
